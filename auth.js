@@ -3,21 +3,22 @@ const GoogleStrategy = require("passport-google-oauth2").Strategy;
 const dotenv = require("dotenv");
 
 dotenv.config({ path: "./config.env" });
-
-const GOOGLE_CLIENT_ID =
-  "1078407646608-fqejhch7rcbf0gsotrjmk2scjfmg1luj.apps.googleusercontent.com";
-const GOOGLE_CLIENT_SECRET = "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";
+// console.log("passport");
 
 passport.use(
   new GoogleStrategy(
     {
-      clientID: GOOGLE_CLIENT_ID,
-      clientSecret: GOOGLE_CLIENT_SECRET,
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "http://localhost:5000/google/callback",
       passReqToCallback: true,
+      scope: ["email", "profile"],
     },
     function (request, accessToken, refreshToken, profile, done) {
-      return done(err, profile);
+      // if (err) {
+      //   return done(err);
+      // }
+      return done(null, profile);
     }
   )
 );

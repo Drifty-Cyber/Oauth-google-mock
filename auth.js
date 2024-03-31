@@ -18,6 +18,7 @@ passport.use(
       // if (err) {
       //   return done(err);
       // }
+      // console.log(profile);
       return done(null, profile);
     }
   )
